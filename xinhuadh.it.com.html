@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国AI工具导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .category {
+            margin-bottom: 2rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            color: #444;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-header {
+            padding: 1.5rem;
+            background: #f0f2f5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tool-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .tool-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        
+        .tool-content {
+            padding: 1.5rem;
+        }
+        
+        .tool-desc {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .tool-link {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .tool-link:hover {
+            background: #2980b9;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .category-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>中国AI工具导航</h1>
+        <p class="subtitle">精选国内领先的AI创作与聊天工具</p>
+    </header>
+    
+    <div class="container">
+        <section class="category">
+            <h2 class="category-title">AI聊天工具</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 24 24" fill="#3498db">
+                                <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.633V8c0-1.103-.897-2-2-2h-6V4.61c.305-.274.5-.668.5-1.11a1.5 1.5 0 0 0-3 0c0 .442.195.836.5 1.11V6H5c-1.103 0-2 .897-2 2v2.997l-.082.006A1 1 0 0 0 1.99 12v2a1 1 0 0 0 1 1H3v5h18v-5h.002a1 1 0 0 0 1-1v-1.938a1.006 1.006 0 0 0-.074-.455zM5 20h6v-3.5l.002-.085a1.5 1.5 0 0 1 2.996.085V20h6v-5h.001l.001-7c0-.001-.001-.001 0-.002V8l.002-.002-.002-.003V8c0-.551.449-1 1-1a1 1 0 0 1 1 1v3H5V8c0-.552.449-1 1-1a1 1 0 0 1 1 1v1.998l-.005.002H7V8.208a.3.3 0 0 0-.294-.294.3.3 0 0 0-.294.294v1.792h-1.4l-.006-.003V8.003c.001-.001 0-.001 0-.003 0-.001 0-.002 0-.003V8c0-.551.449-1 1-1a1 1 0 0 1 1 1v2h10V8c0-.552.449-1 1-1a1 1 0 0 1 1 1v2.993l.01.001L5 11v4H5v5zm14-7v1H5v-1h14z"/>
+                            </svg>
+                        </div>
+                        <h3 class="tool-title">Kimi</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">适用学生生活多种场景，快速协助处理各种任务，会推理解析，能深度思考的AI助手</p>
+                        <a href="https://kimi.moonshot.cn/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 24 24" fill="#3498db">
+                                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+                                <path d="M8 13h8v2H8zm0-4h8v2H8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="tool-title">文心一言</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">百度全新知识增强大语言模型！国产聊天机器人</p>
+                        <a href="https://yiyan.baidu.com/?utm_source=uisdc" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 24 24" fill="#3498db">
+                                <path d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.233V16H4V4h16v12z"/>
+                                <path d="M7 7h10v2H7zm0 4h7v2H7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="tool-title">豆包</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">可聊天，可生图，内置多个智能体</p>
+                        <a href="https://www.doubao.com/chat/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 24 24" fill="#3498db">
+                                <path d="M19.989 11.572a7.96 7.96 0 0 0-1.573-4.351 9.749 9.749 0 0 0-.92.87 7.157 7.157 0 0 1 1.588 3.481c.122 1.151-.1 2.337-.65 3.272a4.543 4.543 0 0 1-1.784 1.599c-1.903.946-4.254.247-5.421-1.557a4.354 4.354 0 0 1-1.138 2.1 4.865 4.865 0 0 1-3.953 1.459 4.54 4.54 0 0 1-2.848-1.484 4.853 4.853 0 0 1-1.099-3.871 4.798 4.798 0 0 1 1.59-2.825 5 5 0 0 1 3.304-1.271c1.351.02 2.639.648 3.53 1.713a4.393 4.393 0 0 1 .82 1.326h.024c.307-.024.624-.02.93.02a4.48 4.48 0 0 1 1.054-.694 4.123 4.123 0 0 1 2.09-.272 4.252 4.252 0 0 1 2.729 1.297 4.661 4.661 0 0 1 1.246 2.86 8.095 8.095 0 0 0-1.435-.202c-3.269-.306-6.67 1.366-8.271 4.079a9.727 9.727 0 0 0 2.995 12.998 9.402 9.402 0 0 0 3.001 1.39 11.02 11.02 0 0 1 5.05-12.594 10.74 10.74 0 0 1 3.141-1.347zM9.731 10.118c-.23.98-.7 1.855-1.348 2.471a3.92 3.92 0 0 1-2.658 1.056 4 4 0 0 1-2.867-1.142A3.743 3.743 0 0 1 2.77 6.97a3.962 3.962 0 0 1 2.773-1.19c.516-.04 1.044.067 1.52.264a4.2 4.2 0 0 1 1.914 2.455c.102.414.158.847.168 1.283.022.136.038.276.038.42-.01-.008-.012-.02-.02-.029a4.225 4.225 0 0 1-.432-.055zm6.878 2.379c-.122-.726-.42-1.395-.967-1.885a2.507 2.507 0 0 0-1.945-.75c-.583.04-1.127.323-1.553.726a2.734 2.734 0 0 0-.63 3.398c.767 1.125 2.316 1.399 3.432.65.4-.3.7-.725.891-1.207a2.644 2.644 0 0 0 .772-.932"/>
+                            </svg>
+                        </div>
+                        <h3 class="tool-title">Deepseek</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">代码文案数学题张口就来，复杂问题秒变人话！</p>
+                        <a href="https://www.deepseek.com/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="category">
+            <h2 class="category-title">AI图像处理</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 24 24" fill="#3498db">
+                                <path d="M19 3H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM5 19V5h14l.002 14H5z"/>
+                                <path d="m10 14-1-1-3 4h12l-5-7z"/>
+                                <circle cx="16" cy="8" r="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="tool-title">LiblibAI</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">中国领先的AI创作平台</p>
+                        <a href="https://www.liblib.art/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 24 24" fill="#3498db">
+                                <path d="M7.061 22c1.523 0 2.84-.543 3.91-1.613 1.123-1.123 1.707-2.854 1.551-4.494l8.564-8.564a3.123 3.123 0 0 0-.002-4.414c-1.178-1.18-3.234-1.18-4.412 0l-8.884 8.884c-1.913.169-3.807 1.521-3.807 3.919 0 .303.021.588.042.86.08 1.031.324 1.878.209 2.103-2.14.993-3.263 2.027-3.263 2.027.3 1.696 1.49 1.292 1.49 1.292 2.145-1.156 4.016-1.14 4.602 0zM19.831 3.686a2.126 2.126 0 0 1 0 3.002L12.468 14.5 9.688 11.72l7.232-7.232c.84-.841 2.12-.841 2.911 0z"/>
+                                <circle cx="8.5" cy="16.5" r="1.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="tool-title">即梦AI</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">一站式AI创作平台，提供图片生成、智能画布、视频生成、故事创作、音乐生成等多种功能</p>
+                        <a href="https://jimeng.jianying.com/ai-tool/home" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2025 中国AI工具导航 | 本导航仅提供链接服务，不代表本站与各平台存在合作关系</p>
+    </footer>
+</body>
+</html>
