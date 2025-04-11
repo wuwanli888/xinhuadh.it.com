@@ -1,39 +1,482 @@
-// 替换原有的粒子设置代码部分
-document.addEventListener('DOMContentLoaded', function() {
-    // 创建简单的粒子效果
-    const particlesContainer = document.getElementById('particles-js');
-    const particleCount = 50; // 减少粒子数量，提高性能
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 3 + 1 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.background = '#4285f4';
-        particle.style.borderRadius = '50%';
-        particle.style.opacity = Math.random() * 0.5 + 0.1;
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.pointerEvents = 'none';
-        
-        // 设置随机动画
-        particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-        
-        particlesContainer.appendChild(particle);
-    }
-    
-    // 添加漂浮动画
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-            50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-            75% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-            100% { transform: translate(0, 0); }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国AI工具导航</title>
+    <!-- 添加Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
         }
-    `;
-    document.head.appendChild(style);
+        
+        body {
+            background-color: #121212; /* 黑色背景 */
+            color: #e0e0e0; /* 浅色文字 */
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 流光特效的容器 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* 鼠标跟随特效 */
+        .cursor-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(66,133,244,0.8) 0%, rgba(66,133,244,0) 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a237e 0%, #311b92 100%); /* 深色渐变 */
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            border-bottom: 1px solid #333;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(66, 133, 244, 0.8); /* 蓝色霓虹光效果 */
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category {
+            margin-bottom: 2rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #333;
+            color: #4285f4; /* 蓝色标题 */
+            text-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background: #1e1e1e; /* 深灰色卡片 */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3), 0 0 15px rgba(66, 133, 244, 0.5);
+            border-color: #4285f4;
+        }
+        
+        .tool-header {
+            padding: 1.5rem;
+            background: #252525; /* 稍微浅一点的黑色 */
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .tool-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: #4285f4; /* 蓝色图标 */
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #181818;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(66, 133, 244, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover .tool-icon {
+            box-shadow: 0 0 15px rgba(66, 133, 244, 0.8);
+            transform: scale(1.1);
+        }
+        
+        .tool-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .tool-content {
+            padding: 1.5rem;
+        }
+        
+        .tool-desc {
+            margin-bottom: 1.5rem;
+            color: #aaa;
+        }
+        
+        .tool-link {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .tool-link:hover:before {
+            left: 100%;
+        }
+        
+        .tool-link:hover {
+            background: #5c9aff;
+            box-shadow: 0 0 15px rgba(66, 133, 244, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid #333;
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .category-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 鼠标跟随特效元素 -->
+    <div class="cursor-effect"></div>
     
-    // 其余鼠标跟随代码保持不变...
-});
+    <!-- 背景粒子效果 -->
+    <div id="particles-js"></div>
+    
+    <header>
+        <h1>中国AI工具导航</h1>
+        <p class="subtitle">精选国内领先的AI创作与聊天工具</p>
+    </header>
+    
+    <div class="container">
+        <section class="category">
+            <h2 class="category-title">AI聊天工具</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="tool-title">Kimi</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">适用学生生活多种场景，快速协助处理各种任务，会推理解析，能深度思考的AI助手</p>
+                        <a href="https://kimi.moonshot.cn/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h3 class="tool-title">文心一言</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">百度全新知识增强大语言模型！国产聊天机器人</p>
+                        <a href="https://yiyan.baidu.com/?utm_source=uisdc" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="tool-title">豆包</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">可聊天，可生图，内置多个智能体</p>
+                        <a href="https://www.doubao.com/chat/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="tool-title">Deepseek</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">代码文案数学题张口就来，复杂问题秒变人话！</p>
+                        <a href="https://www.deepseek.com/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="category">
+            <h2 class="category-title">AI图像处理</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3 class="tool-title">LiblibAI</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">中国领先的AI创作平台</p>
+                        <a href="https://www.liblib.art/" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="tool-title">即梦AI</h3>
+                    </div>
+                    <div class="tool-content">
+                        <p class="tool-desc">一站式AI创作平台，提供图片生成、智能画布、视频生成、故事创作、音乐生成等多种功能</p>
+                        <a href="https://jimeng.jianying.com/ai-tool/home" class="tool-link" target="_blank">访问网站</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2025 中国AI工具导航 | 本导航仅提供链接服务，不代表本站与各平台存在合作关系</p>
+    </footer>
+
+    <!-- 粒子效果JS库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // 鼠标移动跟随效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursorEffect = document.querySelector('.cursor-effect');
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            // 创建额外的光点
+            const createLightDots = (count) => {
+                for (let i = 0; i < count; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'cursor-effect';
+                    dot.style.width = `${Math.random() * 10 + 5}px`;
+                    dot.style.height = dot.style.width;
+                    dot.style.opacity = Math.random() * 0.5 + 0.2;
+                    document.body.appendChild(dot);
+                }
+                return document.querySelectorAll('.cursor-effect');
+            };
+            
+            const dots = createLightDots(15); // 创建15个光点
+            
+            // 更新鼠标位置
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorEffect.style.opacity = 1;
+            });
+            
+            // 动画循环
+            const animate = () => {
+                // 平滑跟随效果
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                
+                // 为每个光点设置不同的位置，创建拖尾效果
+                dots.forEach((dot, index) => {
+                    const speed = 0.05 + (index / dots.length) * 0.05;
+                    const dotX = cursorX + Math.sin(Date.now() * 0.001 + index) * 20;
+                    const dotY = cursorY + Math.cos(Date.now() * 0.001 + index) * 20;
+                    
+                    dot.style.left = `${dotX}px`;
+                    dot.style.top = `${dotY}px`;
+                    dot.style.opacity = 0.3 + Math.sin(Date.now() * 0.005 + index) * 0.3;
+                });
+                
+                requestAnimationFrame(animate);
+            };
+            
+            animate();
+            
+            // 粒子背景设置
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#4285f4'
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 0,
+                            color: '#000000'
+                        },
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#4285f4',
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: 'none',
+                        random: true,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false,
+                        attract: {
+                            enable: true,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 1
+                            }
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+            
+            // 为工具卡片添加悬停发光效果
+            const toolCards = document.querySelectorAll('.tool-card');
+            toolCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.boxShadow = '0 10px 25px rgba(66, 133, 244, 0.4), 0 0 15px rgba(66, 133, 244, 0.6)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
