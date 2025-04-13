@@ -3,172 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新华电脑学院AI工具导航</title>
-    <!-- 添加Font Awesome图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>新华AI工具导航 - xinhuadh.com</title>
+    <meta name="description" content="新华AI工具导航，收集优质AI聊天、图像处理、声音克隆、数字人和视频制作工具">
+    <meta name="keywords" content="新华AI工具导航,AI工具,AI聊天,AI图像,AI视频,AI声音克隆,数字人">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
         
         body {
-            background-color: #121212; /* 黑色背景 */
-            color: #e0e0e0; /* 浅色文字 */
-            line-height: 1.6;
-            position: relative;
+            background-color: #0a0b1a;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 30%);
         }
         
-        /* 流光特效的容器 */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+        
+        .tech-card {
+            background: rgba(22, 25, 40, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .tech-card::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-        
-        /* 鼠标跟随特效 */
-        .cursor-effect {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(66,133,244,0.8) 0%, rgba(66,133,244,0) 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #1a237e 0%, #311b92 100%); /* 深色渐变 */
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-            border-bottom: 1px solid #333;
-        }
-        
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(66, 133, 244, 0.8); /* 蓝色霓虹光效果 */
-        }
-        
-        .subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            position: relative;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
             z-index: 1;
         }
         
-        .category {
-            margin-bottom: 2rem;
+        .tech-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
         }
         
-        .category-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #333;
-            color: #4285f4; /* 蓝色标题 */
-            text-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
-        }
-        
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .tool-card {
-            background: #1e1e1e; /* 深灰色卡片 */
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3), 0 0 15px rgba(66, 133, 244, 0.5);
-            border-color: #4285f4;
-        }
-        
-        .tool-header {
-            padding: 1.5rem;
-            background: #252525; /* 稍微浅一点的黑色 */
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #333;
+        .tech-card:hover::before {
+            transform: translateX(0);
         }
         
         .tool-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-            color: #4285f4; /* 蓝色图标 */
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #181818;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(66, 133, 244, 0.5);
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #3b82f6;
             transition: all 0.3s ease;
         }
         
-        .tool-card:hover .tool-icon {
-            box-shadow: 0 0 15px rgba(66, 133, 244, 0.8);
+        .tech-card:hover .tool-icon {
             transform: scale(1.1);
+            background: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
         }
         
-        .tool-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-            font-weight: 600;
-            color: #fff;
-        }
-        
-        .tool-content {
-            padding: 1.5rem;
-        }
-        
-        .tool-desc {
-            margin-bottom: 1.5rem;
-            color: #aaa;
-        }
-        
-        .tool-link {
+        .visit-btn {
             display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background: #4285f4;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
+            border-radius: 6px;
+            font-weight: 600;
             transition: all 0.3s ease;
+            transform: translateY(5px);
+            opacity: 0;
             position: relative;
             overflow: hidden;
         }
         
-        .tool-link:before {
+        .visit-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -176,305 +111,838 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            transition: left 0.7s ease;
         }
         
-        .tool-link:hover:before {
+        .tech-card:hover .visit-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .tech-card:hover .visit-btn::before {
             left: 100%;
         }
         
-        .tool-link:hover {
-            background: #5c9aff;
-            box-shadow: 0 0 15px rgba(66, 133, 244, 0.8);
-            transform: translateY(-2px);
+        .visit-btn:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px) !important;
         }
         
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-            color: #888;
-            font-size: 0.9rem;
+        .glow-text {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+        }
+        
+        .headline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .headline::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .category-title {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            padding-bottom: 5px;
+        }
+        
+        .category-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: translateX(-100%);
+            animation: slide-in 1.5s ease forwards;
+        }
+        
+        @keyframes slide-in {
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tool-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .category-container {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in 0.5s ease forwards;
+        }
+        
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 100;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+        }
+        
+        .btn-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 导航栏样式 */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            transform: translateX(0);
+        }
+        
+        /* 网站图标占位符 */
+        .site-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 8px;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+        
+        .tech-card:hover .site-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* 水面涟漪效果 */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.5);
+            transform: scale(0);
+            animation: ripple-effect 2s linear;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        @keyframes ripple-effect {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+                border-width: 2px;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+                border-width: 1px;
+            }
+        }
+        
+        /* 二次涟漪，延迟出现 */
+        .ripple-delayed {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            transform: scale(0);
+            animation: ripple-effect-delayed 2s linear;
+            animation-delay: 0.3s;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        @keyframes ripple-effect-delayed {
+            0% {
+                transform: scale(0);
+                opacity: 0.6;
+                border-width: 2px;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+                border-width: 1px;
+            }
+        }
+        
+        /* 水滴效果 */
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0.6) 60%, transparent 100%);
+            border-radius: 50%;
+            transform: scale(1);
+            opacity: 0.8;
+            animation: drop-fade 1s ease-out;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        @keyframes drop-fade {
+            0% { transform: scale(1); opacity: 0.8; }
+            80% { transform: scale(0.5); opacity: 0.4; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        main, header, footer {
             position: relative;
             z-index: 1;
-            border-top: 1px solid #333;
-        }
-        
-        @media (max-width: 768px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 1.75rem;
-            }
-            
-            .category-title {
-                font-size: 1.25rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- 鼠标跟随特效元素 -->
-    <div class="cursor-effect"></div>
-    
-    <!-- 背景粒子效果 -->
-    <div id="particles-js"></div>
-    
-    <header>
-        <h1>新华电脑学院AI工具导航</h1>
-        <p class="subtitle">精选国内领先的AI创作与聊天工具</p>
+    <header class="py-12 px-4 text-center relative">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 glow-text headline">新华AI工具导航</h1>
+            <p class="text-lg text-blue-300 mb-8">发现和使用最优质的AI工具</p>
+            
+            <nav class="flex flex-wrap justify-center gap-4 my-8">
+                <a href="#ai-chat" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">AI聊天工具</a>
+                <a href="#ai-image" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">AI图像处理</a>
+                <a href="#ai-voice" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">声音克隆工具</a>
+                <a href="#ai-digital" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">数字人制作</a>
+                <a href="#ai-video" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">AI视频制作</a>
+            </nav>
+        </div>
     </header>
     
-    <div class="container">
-        <section class="category">
-            <h2 class="category-title">AI聊天工具</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3 class="tool-title">Kimi</h3>
+    <main class="max-w-6xl mx-auto px-4 pb-16">
+        <!-- AI聊天工具 -->
+        <section id="ai-chat" class="mb-16 category-container" style="animation-delay: 0.1s;">
+            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">AI聊天工具</h2>
+            <div class="grid-container">
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">DeepSeek</h3>
                     </div>
-                    <div class="tool-content">
-                        <p class="tool-desc">适用学生生活多种场景，快速协助处理各种任务，会推理解析，能深度思考的AI助手</p>
-                        <a href="https://kimi.moonshot.cn/" class="tool-link" target="_blank">访问网站</a>
-                    </div>
-                </div>
-                
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-comment-dots"></i>
-                        </div>
-                        <h3 class="tool-title">文心一言</h3>
-                    </div>
-                    <div class="tool-content">
-                        <p class="tool-desc">百度全新知识增强大语言模型！国产聊天机器人</p>
-                        <a href="https://yiyan.baidu.com/?utm_source=uisdc" class="tool-link" target="_blank">访问网站</a>
+                    <p class="text-gray-300 mb-4 flex-grow">代码文案数学题张口就来，复杂问题秒变人话！</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">deepseek.com</div>
+                        <a href="https://www.deepseek.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
                 
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3 class="tool-title">豆包</h3>
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Kimi</h3>
                     </div>
-                    <div class="tool-content">
-                        <p class="tool-desc">可聊天，可生图，内置多个智能体</p>
-                        <a href="https://www.doubao.com/chat/" class="tool-link" target="_blank">访问网站</a>
+                    <p class="text-gray-300 mb-4 flex-grow">适用学生生活多种场景，快速协助处理各种任务。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">kimi.moonshot.cn</div>
+                        <a href="https://kimi.moonshot.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
                 
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3 class="tool-title">Deepseek</h3>
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-brain"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">文心一言</h3>
                     </div>
-                    <div class="tool-content">
-                        <p class="tool-desc">代码文案数学题张口就来，复杂问题秒变人话！</p>
-                        <a href="https://www.deepseek.com/" class="tool-link" target="_blank">访问网站</a>
+                    <p class="text-gray-300 mb-4 flex-grow">百度全新知识增强大语言模型，国产聊天机器人。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">yiyan.baidu.com</div>
+                        <a href="https://yiyan.baidu.com/?utm_source=uisdc" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-microchip"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">纳米AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">内置DeepSeek联网满血版。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">bot.n.cn</div>
+                        <a href="https://bot.n.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-coins"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">腾讯元宝</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">内置DeepSeek联网满血版。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">yuanbao.tencent.com</div>
+                        <a href="https://yuanbao.tencent.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- 新增豆包AI -->
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-comment-alt"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">豆包AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持AI写作、作图、搜索、翻译、可聊天，内置多个智能体。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">doubao.com</div>
+                        <a href="https://www.doubao.com/chat/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section class="category">
-            <h2 class="category-title">AI图像处理</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <h3 class="tool-title">LiblibAI</h3>
+        <!-- AI图像处理 -->
+        <section id="ai-image" class="mb-16 category-container" style="animation-delay: 0.2s;">
+            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">AI图像处理</h2>
+            <div class="grid-container">
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-image"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">百度AI图片助手</h3>
                     </div>
-                    <div class="tool-content">
-                        <p class="tool-desc">中国领先的AI创作平台</p>
-                        <a href="https://www.liblib.art/" class="tool-link" target="_blank">访问网站</a>
+                    <p class="text-gray-300 mb-4 flex-grow">提供一键去水印、画质修复、智能消除与替换、AI扩图、风格转换等功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">image.baidu.com</div>
+                        <a href="https://image.baidu.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
                 
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <h3 class="tool-title">即梦AI</h3>
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-crop-alt"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">佐糖</h3>
                     </div>
-                    <div class="tool-content">
-                        <p class="tool-desc">一站式AI创作平台，提供图片生成、智能画布、视频生成、故事创作、音乐生成等多种功能</p>
-                        <a href="https://jimeng.jianying.com/ai-tool/home" class="tool-link" target="_blank">访问网站</a>
+                    <p class="text-gray-300 mb-4 flex-grow">支持一键处理、AI绘画、电商批量处理等功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">picwish.cn</div>
+                        <a href="https://picwish.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-paint-brush"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Canva可画</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">在线设计平台，支持AI生成设计、海量正版素材。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">canva.cn</div>
+                        <a href="https://www.canva.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-shapes"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">豆包AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持AI作图、写作、搜索、翻译等功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">doubao.com</div>
+                        <a href="https://www.doubao.com/chat" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-feather-alt"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">改图鸭</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">提供AI绘图、压缩、编辑、转换和修复功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">gaituya.com</div>
+                        <a href="https://www.gaituya.com" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-star"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">即梦AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持文生图、参数调整、图片超分辨率等功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">jimeng.jianying.com</div>
+                        <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-palette"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">海艺AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持自然语言渲染、多风格图像生成、图片修复与重绘。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">haiyi.art</div>
+                        <a href="https://www.haiyi.art" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">文心一格</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持多风格画作绘制、灵感提示、高效配图。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">yige.baidu.com</div>
+                        <a href="https://yige.baidu.com" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-camera-retro"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">PicsMan AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">提供抠图换背景、消除笔、批量编辑、AI背景、图片变高清等功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">picsman.ai</div>
+                        <a href="https://www.picsman.ai/zh-cn" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">PhotoEditor</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持智能对象移除、自动图像增强、人像修饰、图像放大等功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">photoeditor.ai</div>
+                        <a href="https://photoeditor.ai" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
+        
+        <!-- 声音克隆工具 -->
+        <section id="ai-voice" class="mb-16 category-container" style="animation-delay: 0.3s;">
+            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">声音克隆工具</h2>
+            <div class="grid-container">
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-music"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Noiz AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">专注于语音合成与克隆，依托超大语音模型，生成与真人无异的声音。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">yjpoo.com</div>
+                        <a href="https://www.yjpoo.com/site/5587.html" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Reecho 睿声</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">仅需5-8秒参考音频即可完成克隆，支持中文和英文。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">1ai.net</div>
+                        <a href="https://www.1ai.net/20399.html" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-volume-up"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">蓝藻AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">提供个性化声音复刻和专业定制服务。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">ai-bot.cn</div>
+                        <a href="https://ai-bot.cn/ai-voice-cloning-tools/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-headphones"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">MiniMax Audio</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">仅需30秒音频样本即可精准复刻声音。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">ai-bot.cn</div>
+                        <a href="https://ai-bot.cn/ai-voice-cloning-tools/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-wave-square"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">SoundView</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持多语言，能模仿原音色进行配音。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">ai-bot.cn</div>
+                        <a href="https://ai-bot.cn/ai-voice-cloning-tools/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 数字人制作 -->
+        <section id="ai-digital" class="mb-16 category-container" style="animation-delay: 0.4s;">
+            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">数字人制作</h2>
+            <div class="grid-container">
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">即梦AI数字人</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">通过上传人物图片和参考视频，实现动作和情绪的精准还原。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">aigc.cn</div>
+                        <a href="https://www.aigc.cn/favorites/ai-digital-human" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">有言AI数字人</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">一站式AI视频创作，提供1200+免费3D数字人。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">aigc.cn</div>
+                        <a href="https://www.aigc.cn/favorites/ai-digital-human" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-user-tie"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">韵动AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">适合需要个性化数字人形象和声音克隆的用户。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">aigc.cn</div>
+                        <a href="https://www.aigc.cn/favorites/ai-digital-human" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-child"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">即构数智人</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">结合音视频云服务与大语言模型，支持多种应用场景。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">aigc.cn</div>
+                        <a href="https://www.aigc.cn/favorites/ai-digital-human" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-video"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">慧播星</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">百度推出的电商数字人直播平台，支持快速生成数字人主播。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">aigc.cn</div>
+                        <a href="https://www.aigc.cn/favorites/ai-digital-human" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AI视频制作 -->
+        <section id="ai-video" class="mb-16 category-container" style="animation-delay: 0.5s;">
+            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">AI视频制作</h2>
+            <div class="grid-container">
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-film"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Vace AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">一站式AI视频制作和编辑平台，支持文本到视频、参考到视频生成，可进行视频扩展、风格转换、主体移除与重建等操作。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">vaceai.app</div>
+                        <a href="https://vaceai.app" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-play-circle"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Pollo AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持文生视频、图生视频、角色一致性视频、视频生视频等多种功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">pollo.ai</div>
+                        <a href="https://pollo.ai/zh" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-video-camera"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">Revid AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">从脚本生成到视频生成的一站式服务，支持多种语言和风格模板，具备简单易用的编辑功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">revid.ai</div>
+                        <a href="https://revid.ai" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-magic"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">快手可灵</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持文生视频、图生视频、视频续写、运镜控制等功能，每天赠送66个免费积分。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">klingai.kuaishou.com</div>
+                        <a href="https://klingai.kuaishou.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-photo-video"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">智谱清影</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持文本生成视频、图片生成视频，适用于广告、电影剪辑和短视频制作。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">chatglm.cn</div>
+                        <a href="https://chatglm.cn/video" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-star"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">即梦AI</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">支持AI视频生成和AI图片生成，提供动效画布功能。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">jimeng.jianying.com</div>
+                        <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="site-icon"><i class="fas fa-university"></i></div>
+                        <h3 class="text-xl font-semibold text-blue-300">清华ViDu</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4 flex-grow">清华大学开发的AI视频制作工具。</p>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-400">vidu.studio</div>
+                        <a href="https://www.vidu.studio/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     
-    <footer>
-        <p>© 2025 新华电脑学院AI工具导航 | 本导航仅提供链接服务，不代表本站与各平台存在合作关系，作者：吴麻烦</p>
+    <footer class="text-center py-8 border-t border-blue-900 mt-8">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="text-gray-400 mb-2">© 2025 新华AI工具导航 - xinhuadh.com</p>
+            <p class="text-sm text-gray-500">精选优质AI工具，助力提升工作效率 作者：吴麻烦</p>
+        </div>
     </footer>
-
-    <!-- 粒子效果JS库 -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <button class="btn-top" id="btnTop" aria-label="返回顶部"><i class="fas fa-chevron-up"></i></button>
     
     <script>
-        // 鼠标移动跟随效果
-        document.addEventListener('DOMContentLoaded', function() {
-            const cursorEffect = document.querySelector('.cursor-effect');
-            let mouseX = 0, mouseY = 0;
-            let cursorX = 0, cursorY = 0;
-            
-            // 创建额外的光点
-            const createLightDots = (count) => {
-                for (let i = 0; i < count; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'cursor-effect';
-                    dot.style.width = `${Math.random() * 10 + 5}px`;
-                    dot.style.height = dot.style.width;
-                    dot.style.opacity = Math.random() * 0.5 + 0.2;
-                    document.body.appendChild(dot);
-                }
-                return document.querySelectorAll('.cursor-effect');
-            };
-            
-            const dots = createLightDots(15); // 创建15个光点
-            
-            // 更新鼠标位置
+        // 跟踪鼠标上一次位置，用于判断是否移动
+        let lastX = 0;
+        let lastY = 0;
+        let lastClickTime = 0;
+        
+        // 创建水面涟漪效果
+        function setupWaterRippleEffect() {
             document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursorEffect.style.opacity = 1;
+                const currentTime = Date.now();
+                // 计算鼠标移动距离
+                const distance = Math.sqrt(Math.pow(e.clientX - lastX, 2) + Math.pow(e.clientY - lastY, 2));
+                
+                // 只有移动距离超过一定阈值且时间间隔足够才创建涟漪，避免过于密集
+                if (distance > 50 && currentTime - lastClickTime > 100) {
+                    createWaterRipple(e.clientX, e.clientY);
+                    createWaterDrop(e.clientX, e.clientY);
+                    lastClickTime = currentTime;
+                }
+                
+                // 记录当前位置为上一次位置
+                lastX = e.clientX;
+                lastY = e.clientY;
             });
             
-            // 动画循环
-            const animate = () => {
-                // 平滑跟随效果
-                cursorX += (mouseX - cursorX) * 0.1;
-                cursorY += (mouseY - cursorY) * 0.1;
+            // 点击时一定会创建涟漪
+            document.addEventListener('click', (e) => {
+                createWaterRipple(e.clientX, e.clientY, true);
                 
-                // 为每个光点设置不同的位置，创建拖尾效果
-                dots.forEach((dot, index) => {
-                    const speed = 0.05 + (index / dots.length) * 0.05;
-                    const dotX = cursorX + Math.sin(Date.now() * 0.001 + index) * 20;
-                    const dotY = cursorY + Math.cos(Date.now() * 0.001 + index) * 20;
-                    
-                    dot.style.left = `${dotX}px`;
-                    dot.style.top = `${dotY}px`;
-                    dot.style.opacity = 0.3 + Math.sin(Date.now() * 0.005 + index) * 0.3;
-                });
-                
-                requestAnimationFrame(animate);
-            };
-            
-            animate();
-            
-            // 粒子背景设置
-            particlesJS('particles-js', {
-                particles: {
-                    number: {
-                        value: 80,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    color: {
-                        value: '#4285f4'
-                    },
-                    shape: {
-                        type: 'circle',
-                        stroke: {
-                            width: 0,
-                            color: '#000000'
-                        },
-                    },
-                    opacity: {
-                        value: 0.5,
-                        random: true,
-                        anim: {
-                            enable: true,
-                            speed: 1,
-                            opacity_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    size: {
-                        value: 3,
-                        random: true,
-                        anim: {
-                            enable: true,
-                            speed: 2,
-                            size_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: '#4285f4',
-                        opacity: 0.4,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 1,
-                        direction: 'none',
-                        random: true,
-                        straight: false,
-                        out_mode: 'out',
-                        bounce: false,
-                        attract: {
-                            enable: true,
-                            rotateX: 600,
-                            rotateY: 1200
-                        }
-                    }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: 'grab'
-                        },
-                        onclick: {
-                            enable: true,
-                            mode: 'push'
-                        },
-                        resize: true
-                    },
-                    modes: {
-                        grab: {
-                            distance: 140,
-                            line_linked: {
-                                opacity: 1
-                            }
-                        },
-                        push: {
-                            particles_nb: 4
-                        }
-                    }
-                },
-                retina_detect: true
+                // 点击时创建多个水滴效果
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createWaterDrop(
+                            e.clientX + (Math.random() * 20 - 10),
+                            e.clientY + (Math.random() * 20 - 10)
+                        );
+                    }, i * 50);
+                }
             });
+        }
+        
+        // 创建涟漪效果
+        function createWaterRipple(x, y, isClick = false) {
+            // 创建第一个涟漪圈
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
             
-            // 为工具卡片添加悬停发光效果
-            const toolCards = document.querySelectorAll('.tool-card');
-            toolCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.boxShadow = '0 10px 25px rgba(66, 133, 244, 0.4), 0 0 15px rgba(66, 133, 244, 0.6)';
-                });
+            // 设置涟漪位置
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            // 涟漪大小和颜色
+            const size = isClick ? 30 : 20;
+            ripple.style.width = `${size}px`;
+            ripple.style.height = `${size}px`;
+            
+            // 添加到页面
+            document.body.appendChild(ripple);
+            
+            // 创建第二个延迟出现的涟漪圈
+            const delayedRipple = document.createElement('div');
+            delayedRipple.classList.add('ripple-delayed');
+            
+            // 设置涟漪位置
+            delayedRipple.style.left = `${x}px`;
+            delayedRipple.style.top = `${y}px`;
+            
+            // 涟漪大小
+            delayedRipple.style.width = `${size - 5}px`;
+            delayedRipple.style.height = `${size - 5}px`;
+            
+            // 添加到页面
+            document.body.appendChild(delayedRipple);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                ripple.remove();
+                delayedRipple.remove();
+            }, 2000);
+        }
+        
+        // 创建水滴效果
+        function createWaterDrop(x, y) {
+            const drop = document.createElement('div');
+            drop.classList.add('water-drop');
+            
+            // 设置水滴位置
+            drop.style.left = `${x}px`;
+            drop.style.top = `${y}px`;
+            
+            // 添加到页面
+            document.body.appendChild(drop);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                drop.remove();
+            }, 1000);
+        }
+        
+        // 返回顶部按钮
+        const btnTop = document.getElementById('btnTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btnTop.classList.add('visible');
+            } else {
+                btnTop.classList.remove('visible');
+            }
+        });
+        
+        btnTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                card.addEventListener('mouseleave', () => {
-                    card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
+            });
+        });
+        
+        // 页面载入后执行
+        window.addEventListener('load', () => {
+            setupWaterRippleEffect();
+            
+            // 延迟显示各个分类，创建渐入动画效果
+            document.querySelectorAll('.category-container').forEach((section, index) => {
+                section.style.animationDelay = `${0.1 + index * 0.1}s`;
             });
         });
     </script>
