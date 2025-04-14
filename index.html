@@ -6,22 +6,18 @@
     <title>新华AI工具导航 - xinhuadh.com</title>
     <meta name="description" content="新华AI工具导航，收集优质AI聊天、图像处理、声音克隆、数字人和视频制作工具">
     <meta name="keywords" content="新华AI工具导航,AI工具,AI聊天,AI图像,AI视频,AI声音克隆,数字人">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
-        
+        /* 基本样式 */
         body {
             background-color: #0a0b1a;
             color: #e0e0e0;
-            font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            position: relative;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 30%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
         }
         
+        /* 滚动条样式 */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -35,104 +31,24 @@
             border-radius: 4px;
         }
         
-        .tech-card {
-            background: rgba(22, 25, 40, 0.6);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        .tech-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-            z-index: 1;
-        }
-        
-        .tech-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.4);
-        }
-        
-        .tech-card:hover::before {
-            transform: translateX(0);
-        }
-        
-        .tool-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: rgba(59, 130, 246, 0.2);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-            margin-right: 10px;
-            font-size: 1.2rem;
-            color: #3b82f6;
-            transition: all 0.3s ease;
-        }
-        
-        .tech-card:hover .tool-icon {
-            transform: scale(1.1);
-            background: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
-        }
-        
-        .visit-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            transform: translateY(5px);
-            opacity: 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .visit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s ease;
-        }
-        
-        .tech-card:hover .visit-btn {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .tech-card:hover .visit-btn::before {
-            left: 100%;
-        }
-        
-        .visit-btn:hover {
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
-            transform: translateY(-2px) !important;
-        }
-        
-        .glow-text {
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 50px 0 30px;
         }
         
         .headline {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
             position: relative;
             display: inline-block;
         }
@@ -144,67 +60,136 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
-            background-size: 200% 100%;
-            animation: gradient-shift 3s ease infinite;
-        }
-        
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .category-title {
-            position: relative;
-            display: inline-block;
-            overflow: hidden;
-            padding-bottom: 5px;
-        }
-        
-        .category-title::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transform: translateX(-100%);
-            animation: slide-in 1.5s ease forwards;
         }
         
-        @keyframes slide-in {
-            to {
-                transform: translateX(0);
-            }
+        .subtitle {
+            color: #4f9cf7;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
         
-        .grid-container {
+        /* 导航菜单 */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .nav-link {
+            background-color: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* 分类标题 */
+        .category-title {
+            color: #4f9cf7;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b82f6;
+        }
+        
+        /* 卡片网格 */
+        .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
+            margin-bottom: 40px;
         }
         
-        .tool-link {
+        /* 工具卡片 */
+        .tool-card {
+            background-color: rgba(22, 25, 40, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .tool-name {
+            color: #4f9cf7;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .tool-description {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .domain {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        
+        .visit-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
             text-decoration: none;
-            color: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
         
-        .category-container {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fade-in 0.5s ease forwards;
+        .visit-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
         
-        @keyframes fade-in {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .btn-top {
+        /* 返回顶部按钮 */
+        .back-to-top {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -216,673 +201,470 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
+            text-decoration: none;
             opacity: 0;
             visibility: hidden;
-            z-index: 100;
-            font-size: 1.2rem;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            font-size: 24px;
         }
         
-        .btn-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
-        }
-        
-        .btn-top.visible {
+        .back-to-top.visible {
             opacity: 1;
             visibility: visible;
         }
         
-        /* 导航栏样式 */
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: hidden;
+        .back-to-top:hover {
+            transform: translateY(-5px);
         }
         
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #333;
         }
         
-        .nav-link:hover::before {
-            transform: translateX(0);
+        footer p {
+            color: #666;
+            margin: 5px 0;
         }
         
-        /* 网站图标占位符 */
-        .site-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #fff;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 8px;
-            margin-right: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-        }
-        
-        .tech-card:hover .site-icon {
-            transform: rotate(5deg) scale(1.1);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
-        }
-        
-        /* 水面涟漪效果 */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid rgba(59, 130, 246, 0.5);
-            transform: scale(0);
-            animation: ripple-effect 2s linear;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        
-        @keyframes ripple-effect {
-            0% {
-                transform: scale(0);
-                opacity: 0.8;
-                border-width: 2px;
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2rem;
             }
-            100% {
-                transform: scale(4);
-                opacity: 0;
-                border-width: 1px;
+            
+            .card-grid {
+                grid-template-columns: 1fr;
             }
-        }
-        
-        /* 二次涟漪，延迟出现 */
-        .ripple-delayed {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid rgba(139, 92, 246, 0.5);
-            transform: scale(0);
-            animation: ripple-effect-delayed 2s linear;
-            animation-delay: 0.3s;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        
-        @keyframes ripple-effect-delayed {
-            0% {
-                transform: scale(0);
-                opacity: 0.6;
-                border-width: 2px;
-            }
-            100% {
-                transform: scale(3);
-                opacity: 0;
-                border-width: 1px;
-            }
-        }
-        
-        /* 水滴效果 */
-        .water-drop {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0.6) 60%, transparent 100%);
-            border-radius: 50%;
-            transform: scale(1);
-            opacity: 0.8;
-            animation: drop-fade 1s ease-out;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        
-        @keyframes drop-fade {
-            0% { transform: scale(1); opacity: 0.8; }
-            80% { transform: scale(0.5); opacity: 0.4; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-        
-        main, header, footer {
-            position: relative;
-            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <header class="py-12 px-4 text-center relative">
-        <div class="max-w-6xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold mb-2 glow-text headline">新华AI工具导航</h1>
-            <p class="text-lg text-blue-300 mb-8">发现和使用最优质的AI工具</p>
+    <header>
+        <div class="container">
+            <h1 class="headline">新华AI工具导航</h1>
+            <p class="subtitle">发现和使用最优质的AI工具</p>
             
-            <nav class="flex flex-wrap justify-center gap-4 my-8">
-                <a href="#ai-chat" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">AI聊天工具</a>
-                <a href="#ai-image" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">AI图像处理</a>
-                <a href="#ai-voice" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">声音克隆工具</a>
-                <a href="#ai-digital" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">数字人制作</a>
-                <a href="#ai-video" class="nav-link px-4 py-2 rounded-full bg-blue-900 bg-opacity-30 hover:bg-opacity-50 border border-blue-500 transition duration-300">AI视频制作</a>
+            <nav class="main-nav">
+                <a href="#ai-chat" class="nav-link">AI聊天工具</a>
+                <a href="#ai-image" class="nav-link">AI图像处理</a>
+                <a href="#ai-voice" class="nav-link">声音克隆工具</a>
+                <a href="#ai-digital" class="nav-link">数字人制作</a>
+                <a href="#ai-video" class="nav-link">AI视频制作</a>
             </nav>
         </div>
     </header>
     
-    <main class="max-w-6xl mx-auto px-4 pb-16">
+    <main class="container">
         <!-- AI聊天工具 -->
-        <section id="ai-chat" class="mb-16 category-container" style="animation-delay: 0.1s;">
-            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">AI聊天工具</h2>
-            <div class="grid-container">
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-comment-dots"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">DeepSeek</h3>
+        <section id="ai-chat">
+            <h2 class="category-title">AI聊天工具</h2>
+            <div class="card-grid">
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">D</div>
+                        <h3 class="tool-name">DeepSeek</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">代码文案数学题张口就来，复杂问题秒变人话！</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">deepseek.com</div>
-                        <a href="https://www.deepseek.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-robot"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Kimi</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">适用学生生活多种场景，快速协助处理各种任务。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">kimi.moonshot.cn</div>
-                        <a href="https://kimi.moonshot.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">代码文案数学题张口就来，复杂问题秒变人话！</p>
+                    <div class="card-footer">
+                        <div class="domain">deepseek.com</div>
+                        <a href="https://www.deepseek.com/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-brain"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">文心一言</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">K</div>
+                        <h3 class="tool-name">Kimi</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">百度全新知识增强大语言模型，国产聊天机器人。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">yiyan.baidu.com</div>
-                        <a href="https://yiyan.baidu.com/?utm_source=uisdc" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-microchip"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">纳米AI</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">内置DeepSeek联网满血版。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">bot.n.cn</div>
-                        <a href="https://bot.n.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">适用学生生活多种场景，快速协助处理各种任务。</p>
+                    <div class="card-footer">
+                        <div class="domain">kimi.moonshot.cn</div>
+                        <a href="https://kimi.moonshot.cn/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-coins"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">腾讯元宝</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">文</div>
+                        <h3 class="tool-name">文心一言</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">内置DeepSeek联网满血版。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">yuanbao.tencent.com</div>
-                        <a href="https://yuanbao.tencent.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">百度全新知识增强大语言模型，国产聊天机器人。</p>
+                    <div class="card-footer">
+                        <div class="domain">yiyan.baidu.com</div>
+                        <a href="https://yiyan.baidu.com/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <!-- 豆包AI -->
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-comment-alt"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">豆包AI</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">纳</div>
+                        <h3 class="tool-name">纳米AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持AI写作、作图、搜索、翻译、可聊天，内置多个智能体。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">doubao.com</div>
-                        <a href="https://www.doubao.com/chat/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">内置DeepSeek联网满血版。</p>
+                    <div class="card-footer">
+                        <div class="domain">bot.n.cn</div>
+                        <a href="https://bot.n.cn/" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">元</div>
+                        <h3 class="tool-name">腾讯元宝</h3>
+                    </div>
+                    <p class="tool-description">内置DeepSeek联网满血版。</p>
+                    <div class="card-footer">
+                        <div class="domain">yuanbao.tencent.com</div>
+                        <a href="https://yuanbao.tencent.com/" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">豆</div>
+                        <h3 class="tool-name">豆包AI</h3>
+                    </div>
+                    <p class="tool-description">支持AI写作、作图、搜索、翻译、可聊天，内置多个智能体。</p>
+                    <div class="card-footer">
+                        <div class="domain">doubao.com</div>
+                        <a href="https://www.doubao.com/chat/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- AI图像处理 -->
-        <section id="ai-image" class="mb-16 category-container" style="animation-delay: 0.2s;">
-            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">AI图像处理</h2>
-            <div class="grid-container">
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-crop-alt"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">佐糖</h3>
+        <section id="ai-image">
+            <h2 class="category-title">AI图像处理</h2>
+            <div class="card-grid">
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">佐</div>
+                        <h3 class="tool-name">佐糖</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持一键处理、AI绘画、电商批量处理等功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">picwish.cn</div>
-                        <a href="https://picwish.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-paint-brush"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Canva可画</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">在线设计平台，支持AI生成设计、海量正版素材。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">canva.cn</div>
-                        <a href="https://www.canva.cn/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">支持一键处理、AI绘画、电商批量处理等功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">picwish.cn</div>
+                        <a href="https://picwish.cn/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-shapes"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">豆包AI</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">C</div>
+                        <h3 class="tool-name">Canva可画</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持AI作图、写作、搜索、翻译等功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">doubao.com</div>
-                        <a href="https://www.doubao.com/chat" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-feather-alt"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">改图鸭</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">提供AI绘图、压缩、编辑、转换和修复功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">gaituya.com</div>
-                        <a href="https://www.gaituya.com" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">在线设计平台，支持AI生成设计、海量正版素材。</p>
+                    <div class="card-footer">
+                        <div class="domain">canva.cn</div>
+                        <a href="https://www.canva.cn/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-star"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">即梦AI</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">豆</div>
+                        <h3 class="tool-name">豆包AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持文生图、参数调整、图片超分辨率等功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">jimeng.jianying.com</div>
-                        <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-palette"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">海艺AI</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持自然语言渲染、多风格图像生成、图片修复与重绘。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">haiyi.art</div>
-                        <a href="https://www.haiyi.art" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">支持AI作图、写作、搜索、翻译等功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">doubao.com</div>
+                        <a href="https://www.doubao.com/chat" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-heart"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">文心一格</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">改</div>
+                        <h3 class="tool-name">改图鸭</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持多风格画作绘制、灵感提示、高效配图。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">yige.baidu.com</div>
-                        <a href="https://yige.baidu.com" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-camera-retro"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">PicsMan AI</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">提供抠图换背景、消除笔、批量编辑、AI背景、图片变高清等功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">picsman.ai</div>
-                        <a href="https://www.picsman.ai/zh-cn" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">提供AI绘图、压缩、编辑、转换和修复功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">gaituya.com</div>
+                        <a href="https://www.gaituya.com" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">PhotoEditor</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">即</div>
+                        <h3 class="tool-name">即梦AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持智能对象移除、自动图像增强、人像修饰、图像放大等功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">photoeditor.ai</div>
-                        <a href="https://photoeditor.ai" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">支持文生图、参数调整、图片超分辨率等功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">jimeng.jianying.com</div>
+                        <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">海</div>
+                        <h3 class="tool-name">海艺AI</h3>
+                    </div>
+                    <p class="tool-description">支持自然语言渲染、多风格图像生成、图片修复与重绘。</p>
+                    <div class="card-footer">
+                        <div class="domain">haiyi.art</div>
+                        <a href="https://www.haiyi.art" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">文</div>
+                        <h3 class="tool-name">文心一格</h3>
+                    </div>
+                    <p class="tool-description">支持多风格画作绘制、灵感提示、高效配图。</p>
+                    <div class="card-footer">
+                        <div class="domain">yige.baidu.com</div>
+                        <a href="https://yige.baidu.com" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">P</div>
+                        <h3 class="tool-name">PicsMan AI</h3>
+                    </div>
+                    <p class="tool-description">提供抠图换背景、消除笔、批量编辑、AI背景、图片变高清等功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">picsman.ai</div>
+                        <a href="https://www.picsman.ai/zh-cn" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">P</div>
+                        <h3 class="tool-name">PhotoEditor</h3>
+                    </div>
+                    <p class="tool-description">支持智能对象移除、自动图像增强、人像修饰、图像放大等功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">photoeditor.ai</div>
+                        <a href="https://photoeditor.ai" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- 声音克隆工具 -->
-        <section id="ai-voice" class="mb-16 category-container" style="animation-delay: 0.3s;">
-            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">声音克隆工具</h2>
-            <div class="grid-container">
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-music"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Noiz AI</h3>
+        <section id="ai-voice">
+            <h2 class="category-title">声音克隆工具</h2>
+            <div class="card-grid">
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">N</div>
+                        <h3 class="tool-name">Noiz AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">专注于语音合成与克隆，依托超大语音模型，生成与真人无异的声音。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">noiz.ai</div>
-                        <a href="https://noiz.ai/landing" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-microphone-alt"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Reecho 睿声</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">仅需5-8秒参考音频即可完成克隆，支持中文和英文。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">reecho.cn</div>
-                        <a href="https://www.reecho.cn/?ref=aifux.com" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">专注于语音合成与克隆，依托超大语音模型，生成与真人无异的声音。</p>
+                    <div class="card-footer">
+                        <div class="domain">noiz.ai</div>
+                        <a href="https://noiz.ai/landing" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-headphones"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">MiniMax Audio</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">R</div>
+                        <h3 class="tool-name">Reecho 睿声</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">仅需30秒音频样本即可精准复刻声音。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">minimax.io</div>
-                        <a href="https://www.minimax.io/audio" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">仅需5-8秒参考音频即可完成克隆，支持中文和英文。</p>
+                    <div class="card-footer">
+                        <div class="domain">reecho.cn</div>
+                        <a href="https://www.reecho.cn/?ref=aifux.com" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-wave-square"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">SoundView</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">M</div>
+                        <h3 class="tool-name">MiniMax Audio</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持多语言，能模仿原音色进行配音。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">soundviewai.com</div>
-                        <a href="https://soundviewai.com/video-workbench" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">仅需30秒音频样本即可精准复刻声音。</p>
+                    <div class="card-footer">
+                        <div class="domain">minimax.io</div>
+                        <a href="https://www.minimax.io/audio" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">S</div>
+                        <h3 class="tool-name">SoundView</h3>
+                    </div>
+                    <p class="tool-description">支持多语言，能模仿原音色进行配音。</p>
+                    <div class="card-footer">
+                        <div class="domain">soundviewai.com</div>
+                        <a href="https://soundviewai.com/video-workbench" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- 数字人制作 -->
-        <section id="ai-digital" class="mb-16 category-container" style="animation-delay: 0.4s;">
-            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">数字人制作</h2>
-            <div class="grid-container">
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-user-astronaut"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">即梦AI数字人</h3>
+        <section id="ai-digital">
+            <h2 class="category-title">数字人制作</h2>
+            <div class="card-grid">
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">即</div>
+                        <h3 class="tool-name">即梦AI数字人</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">通过上传人物图片和参考视频，实现动作和情绪的精准还原。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">jimeng.jianying.com</div>
-                        <a href="https://jimeng.jianying.com/ai-tool/home/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">通过上传人物图片和参考视频，实现动作和情绪的精准还原。</p>
+                    <div class="card-footer">
+                        <div class="domain">jimeng.jianying.com</div>
+                        <a href="https://jimeng.jianying.com/ai-tool/home/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-robot"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">有言AI数字人</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">有</div>
+                        <h3 class="tool-name">有言AI数字人</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">一站式AI视频创作，提供1200+免费3D数字人。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">youyan3d.com</div>
-                        <a href="https://www.youyan3d.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">一站式AI视频创作，提供1200+免费3D数字人。</p>
+                    <div class="card-footer">
+                        <div class="domain">youyan3d.com</div>
+                        <a href="https://www.youyan3d.com/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- AI视频制作 -->
-        <section id="ai-video" class="mb-16 category-container" style="animation-delay: 0.5s;">
-            <h2 class="text-2xl font-bold mb-8 category-title text-blue-400">AI视频制作</h2>
-            <div class="grid-container">
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-film"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Vace AI</h3>
+        <section id="ai-video">
+            <h2 class="category-title">AI视频制作</h2>
+            <div class="card-grid">
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">V</div>
+                        <h3 class="tool-name">Vace AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">一站式AI视频制作和编辑平台，支持文本到视频、参考到视频生成，可进行视频扩展、风格转换、主体移除与重建等操作。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">vaceai.app</div>
-                        <a href="https://vaceai.app" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-play-circle"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Pollo AI</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持文生视频、图生视频、角色一致性视频、视频生视频等多种功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">pollo.ai</div>
-                        <a href="https://pollo.ai/zh" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">一站式AI视频制作和编辑平台，支持文本到视频、参考到视频生成，可进行视频扩展、风格转换、主体移除与重建等操作。</p>
+                    <div class="card-footer">
+                        <div class="domain">vaceai.app</div>
+                        <a href="https://vaceai.app" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-video-camera"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">Revid AI</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">P</div>
+                        <h3 class="tool-name">Pollo AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">从脚本生成到视频生成的一站式服务，支持多种语言和风格模板，具备简单易用的编辑功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">revid.ai</div>
-                        <a href="https://revid.ai" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-magic"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">快手可灵</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持文生视频、图生视频、视频续写、运镜控制等功能，每天赠送66个免费积分。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">klingai.kuaishou.com</div>
-                        <a href="https://klingai.kuaishou.com/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">支持文生视频、图生视频、角色一致性视频、视频生视频等多种功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">pollo.ai</div>
+                        <a href="https://pollo.ai/zh" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-photo-video"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">智谱清影</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">R</div>
+                        <h3 class="tool-name">Revid AI</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持文本生成视频、图片生成视频，适用于广告、电影剪辑和短视频制作。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">chatglm.cn</div>
-                        <a href="https://chatglm.cn/video" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-star"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">即梦AI</h3>
-                    </div>
-                    <p class="text-gray-300 mb-4 flex-grow">支持AI视频生成和AI图片生成，提供动效画布功能。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">jimeng.jianying.com</div>
-                        <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">从脚本生成到视频生成的一站式服务，支持多种语言和风格模板，具备简单易用的编辑功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">revid.ai</div>
+                        <a href="https://revid.ai" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
                 
-                <div class="tech-card rounded-lg p-6 h-full flex flex-col">
-                    <div class="flex items-center mb-4">
-                        <div class="site-icon"><i class="fas fa-university"></i></div>
-                        <h3 class="text-xl font-semibold text-blue-300">清华ViDu</h3>
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">可</div>
+                        <h3 class="tool-name">快手可灵</h3>
                     </div>
-                    <p class="text-gray-300 mb-4 flex-grow">清华大学开发的AI视频制作工具。</p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-xs text-gray-400">vidu.studio</div>
-                        <a href="https://www.vidu.studio/" target="_blank" class="visit-btn">访问网站 <i class="fas fa-arrow-right ml-1"></i></a>
+                    <p class="tool-description">支持文生视频、图生视频、视频续写、运镜控制等功能，每天赠送66个免费积分。</p>
+                    <div class="card-footer">
+                        <div class="domain">klingai.kuaishou.com</div>
+                        <a href="https://klingai.kuaishou.com/" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">智</div>
+                        <h3 class="tool-name">智谱清影</h3>
+                    </div>
+                    <p class="tool-description">支持文本生成视频、图片生成视频，适用于广告、电影剪辑和短视频制作。</p>
+                    <div class="card-footer">
+                        <div class="domain">chatglm.cn</div>
+                        <a href="https://chatglm.cn/video" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">即</div>
+                        <h3 class="tool-name">即梦AI</h3>
+                    </div>
+                    <p class="tool-description">支持AI视频生成和AI图片生成，提供动效画布功能。</p>
+                    <div class="card-footer">
+                        <div class="domain">jimeng.jianying.com</div>
+                        <a href="https://jimeng.jianying.com/ai-tool/home" target="_blank" class="visit-button">访问网站</a>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="card-header">
+                        <div class="tool-icon">V</div>
+                        <h3 class="tool-name">清华ViDu</h3>
+                    </div>
+                    <p class="tool-description">清华大学开发的AI视频制作工具。</p>
+                    <div class="card-footer">
+                        <div class="domain">vidu.studio</div>
+                        <a href="https://www.vidu.studio/" target="_blank" class="visit-button">访问网站</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
     
-    <footer class="text-center py-8 border-t border-blue-900 mt-8">
-        <div class="max-w-6xl mx-auto px-4">
-            <p class="text-gray-400 mb-2">© 2025 新华AI工具导航 - xinhuadh.com</p>
-            <p class="text-sm text-gray-500">精选优质AI工具，助力提升工作效率 作者：吴麻烦</p>
+    <footer>
+        <div class="container">
+            <p>© 2025 新华AI工具导航 - xinhuadh.com</p>
+            <p>精选优质AI工具，助力提升工作效率</p>
         </div>
     </footer>
     
-    <button class="btn-top" id="btnTop" aria-label="返回顶部"><i class="fas fa-chevron-up"></i></button>
+    <a href="#" id="backToTop" class="back-to-top">&uarr;</a>
     
     <script>
-        // 跟踪鼠标上一次位置，用于判断是否移动
-        let lastX = 0;
-        let lastY = 0;
-        let lastClickTime = 0;
+        // 简单的返回顶部功能
+        const backToTop = document.getElementById('backToTop');
         
-        // 创建水面涟漪效果
-        function setupWaterRippleEffect() {
-            document.addEventListener('mousemove', (e) => {
-                const currentTime = Date.now();
-                // 计算鼠标移动距离
-                const distance = Math.sqrt(Math.pow(e.clientX - lastX, 2) + Math.pow(e.clientY - lastY, 2));
-                
-                // 只有移动距离超过一定阈值且时间间隔足够才创建涟漪，避免过于密集
-                if (distance > 50 && currentTime - lastClickTime > 100) {
-                    createWaterRipple(e.clientX, e.clientY);
-                    createWaterDrop(e.clientX, e.clientY);
-                    lastClickTime = currentTime;
-                }
-                
-                // 记录当前位置为上一次位置
-                lastX = e.clientX;
-                lastY = e.clientY;
-            });
-            
-            // 点击时一定会创建涟漪
-            document.addEventListener('click', (e) => {
-                createWaterRipple(e.clientX, e.clientY, true);
-                
-                // 点击时创建多个水滴效果
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        createWaterDrop(
-                            e.clientX + (Math.random() * 20 - 10),
-                            e.clientY + (Math.random() * 20 - 10)
-                        );
-                    }, i * 50);
-                }
-            });
-        }
-        
-        // 创建涟漪效果
-        function createWaterRipple(x, y, isClick = false) {
-            // 创建第一个涟漪圈
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            
-            // 设置涟漪位置
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            
-            // 涟漪大小和颜色
-            const size = isClick ? 30 : 20;
-            ripple.style.width = `${size}px`;
-            ripple.style.height = `${size}px`;
-            
-            // 添加到页面
-            document.body.appendChild(ripple);
-            
-            // 创建第二个延迟出现的涟漪圈
-            const delayedRipple = document.createElement('div');
-            delayedRipple.classList.add('ripple-delayed');
-            
-            // 设置涟漪位置
-            delayedRipple.style.left = `${x}px`;
-            delayedRipple.style.top = `${y}px`;
-            
-            // 涟漪大小
-            delayedRipple.style.width = `${size - 5}px`;
-            delayedRipple.style.height = `${size - 5}px`;
-            
-            // 添加到页面
-            document.body.appendChild(delayedRipple);
-            
-            // 动画结束后移除元素
-            setTimeout(() => {
-                ripple.remove();
-                delayedRipple.remove();
-            }, 2000);
-        }
-        
-        // 创建水滴效果
-        function createWaterDrop(x, y) {
-            const drop = document.createElement('div');
-            drop.classList.add('water-drop');
-            
-            // 设置水滴位置
-            drop.style.left = `${x}px`;
-            drop.style.top = `${y}px`;
-            
-            // 添加到页面
-            document.body.appendChild(drop);
-            
-            // 动画结束后移除元素
-            setTimeout(() => {
-                drop.remove();
-            }, 1000);
-        }
-        
-        // 返回顶部按钮
-        const btnTop = document.getElementById('btnTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                btnTop.classList.add('visible');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
             } else {
-                btnTop.classList.remove('visible');
+                backToTop.classList.remove('visible');
             }
         });
         
-        btnTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
         });
         
-        // 平滑滚动
+        // 平滑滚动到锚点
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // 页面载入后执行
-        window.addEventListener('load', () => {
-            setupWaterRippleEffect();
-            
-            // 延迟显示各个分类，创建渐入动画效果
-            document.querySelectorAll('.category-container').forEach((section, index) => {
-                section.style.animationDelay = `${0.1 + index * 0.1}s`;
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
             });
         });
     </script>
